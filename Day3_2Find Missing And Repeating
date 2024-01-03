@@ -1,0 +1,42 @@
+
+class Solution{
+    
+public:
+    typedef long long int ll;
+    
+    vector<int> findTwoElement(vector<int> arr, int n) {
+  
+       
+       // s - sn = val , x-y = val 
+       ll sum = 0;
+       
+       for(auto num:arr){
+           sum+=num;
+       }
+       
+       ll sumN = n*(n+1)/2;
+       
+       ll val = sum-sumN;
+       
+       // s2-sn2=val2    x+y = val2/val , x+y = val3 
+       ll sum2 = 0;
+       ll sum2n = 0;
+       
+       for(auto num:arr){
+           sum2+=(num*1ll*num);
+       }
+       
+       sum2n = n*1ll*(n+1)*(2*1ll*n+1)/6;
+       
+       ll val2 = sum2-sum2n;
+       
+       ll val3 = val2/val;
+       
+       ll x = (val3+val)/2;
+       
+       ll y = val3-x;
+       
+       return {(int)x,(int)y};
+      
+    }
+};
