@@ -1,0 +1,37 @@
+
+class Solution{   
+public:
+    string printMinNumberForPattern(string str){
+       stack<char>st;
+       string ans = "";
+       char cnt = '1';
+       
+       /*  For D -> Push cnt and Increase Cnt 
+            For I -> Push cnt and Increase cnt ,and pop out the stack nodes 
+       */
+       
+       for(int i=0;i<str.length();i++){
+           if(str[i]=='D'){
+               st.push(cnt);
+               cnt++;
+           }
+           else if(str[i]=='I'){
+               st.push(cnt);
+               cnt++;
+               
+               while(!st.empty()){
+                   ans.push_back(st.top());
+                   st.pop();
+               }
+           }
+       }
+       
+       st.push(cnt);
+       
+       while(!st.empty()){
+           ans.push_back(st.top());
+           st.pop();
+       }
+       return ans;
+    }
+};
