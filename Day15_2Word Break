@@ -1,0 +1,36 @@
+class Solution {
+    private:
+    vector<int>dp;
+    bool solve(int ind,string &s,unordered_set<string> &us){
+        // base case
+        if(ind>=s.length()){
+            return true;
+        }
+
+        if(dp[ind]!=-1){
+            return dp[ind];
+        }
+
+        for(int len=1;len<=s.length();len++){
+            string temp = s.substr(ind,len);
+
+            if((us.find(temp)!=us.end()) && solve(len+ind,s,us)){
+                return  dp[ind]=true;
+            }
+        }
+        return  dp[ind]=false;
+    }
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string>us;
+
+        for(auto it :wordDict){
+            us.insert(it);
+        }
+
+        dp.assign(s.length()+1,-1);
+
+        return solve(0,s,us);
+
+    }
+};
