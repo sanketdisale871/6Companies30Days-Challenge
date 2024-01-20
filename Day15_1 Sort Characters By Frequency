@@ -1,0 +1,59 @@
+class Solution {
+    // DSA Student : Sanket Disale
+public:    
+  
+    string frequencySort(string s) {
+        /*
+        // map<char,freq>um
+       unordered_map<char,int>um;
+
+        for(auto ch:s){
+            um[ch]++;
+        }
+        // i am sorting as i want
+        sort(s.begin(),s.end(),[&](char a,char b){
+            return um[a] != um[b] ? um[a]>um[b] : a>b;
+        });
+
+
+   */
+
+    // Another approch : priority queue 
+    /*
+    Algo :
+    i) store the char & cnt in map
+    ii) insert into priority queue.
+    iii) according their occuring frequency, add the charcters in string    
+    */
+
+    unordered_map<char,int>um;
+
+    priority_queue<pair<int,char>>pq;
+
+    // Storing cnt in unordered Map 
+    for(int i=0;i<s.size();i++){
+        char ch = s[i];
+        um[ch]++;
+    }
+    // adding chars in priority queue 
+    for(auto it :um){
+        pq.push({it.second,it.first});
+    }
+    // we have to return this string
+    string res ="";
+
+    while(!pq.empty()){
+        pair<int,char>p = pq.top();
+        pq.pop();
+
+        int freq = p.first;
+
+        while(freq>0){
+            res.push_back(p.second);
+            freq--;
+        }
+    }
+    return res;   
+
+    }
+};
